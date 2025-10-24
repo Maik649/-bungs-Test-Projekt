@@ -5,19 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="globel.css">
     <script src="globel.js" defer></script>
-    <title>Test Projekt</title>
+    <title>Notizen </title>
+    
 </head>
-<body>
+<body onload="init()">
     <header>
-        <h1>Test Projekt </h1>
+        <h1>Notizen</h1>
     </header>
     <main>
-        <div id="main-content">
-
+        <div class="eingabeForm">
+            <label for="lvorname">Vorname</label>
+            <input type="text" name="lvorname" id="lvorname">
+        
+            <button onclick=" addnote()">Notitz Hinzufügen</button>
             
 
-
-
+        </div>
+        <div id="main-content">
+            
         </div>
     </main>
     <footer></footer>
