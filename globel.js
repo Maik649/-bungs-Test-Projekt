@@ -1,34 +1,30 @@
-const mainConten = document.getElementById("main-content");
 
-window.addEventListener("load", () => {
-  mainConten.innerHTML += render();
-});
-
-function render() {
-  return template1();
+let notes=[];
+function init() {
+  return renderNodes();
 }
 
-function template1() {
-  return ` <div class="eingabeForm">
-                <form action="">
+function renderNodes() {
+  const mainConten = document.getElementById("main-content");
+  mainConten.innerHTML="";
+  for (let notsindex = 0; notsindex < notes.length; notsindex++) {
+    mainConten.innerHTML += getNoteTamplate(notsindex);
+  }
+  
+}
+function getNoteTamplate(notsindex) {
+  return `<p>+ ${notes[notsindex]} <button onclick="removeItem(${notsindex})">x</button></p>`;
+}
+function addnote() {
+  let noteInput = document.getElementById("lvorname");
+  let noteInputref = noteInput.value;
 
-                    <label for="lvorname"></label>
-                    <input type="text" name="lvorname" id="lvorname">
+  notes.push(noteInputref);
+  renderNodes();
+  noteInput.value ="";
+}
 
-                    <label for="lnachname"></label>
-                    <input type="text" name="lnachname" id="lnachname">
-
-                    <label for="lstraße"></label>
-                    <input type="text" name="lstraße" id="lstraße">
-
-                    <label for="lort"></label>
-                    <input type="text" name="lort" id="lort">
-
-                    <label for="ltime"></label>
-                    <input type="time" name="ltime" id="ltime">
-                    <label for="ldate"></label>
-                    <input type="text" name="ldate" id="ldate">
-
-                </form>
-            </div>`;
+function removeItem(notsindex) {
+  notes.splice(notsindex, 1);
+  renderNodes();
 }
