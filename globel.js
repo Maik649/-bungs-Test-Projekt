@@ -25,7 +25,11 @@ function renderNodes() {
 
 function renderTrashNodes() {
   trashConten.innerHTML = "";
-  for (let trashnotsindex = 0; trashnotsindex < trashNoats.length; trashnotsindex++) {
+  for (
+    let trashnotsindex = 0;
+    trashnotsindex < trashNoats.length;
+    trashnotsindex++
+  ) {
     trashConten.innerHTML += getTrashNoteTamplate(trashnotsindex);
   }
 }
@@ -44,6 +48,7 @@ function addnote() {
   mainConten.innerHTML = "";
 
   renderNodes();
+  titelInput.value = "";
   noteInput.value = "";
 }
 
