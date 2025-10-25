@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
 </head>
 <body onload="init()">
     <header>
-        <h1>Notizen</h1>
+        <h1>Notiz Block</h1>
     </header>
     <main>
         <div class="eingabeForm">
@@ -18,14 +18,13 @@
             <input type="text" name="ltitle" id="ltitle">
             <label for="lnote">Eingabe:</label>
             <input type="text" name="lnote" id="lnote">
-        
             <button onclick=" addnote()">Notitz Hinzufügen</button>
             
 
         </div>
         <h2>Notizen</h2>
-        <div id="main-content">
-            
+        <div id="main-content" class="main-content">
+           
         </div>
         <h2>Papierkorp</h2>
         <div id="trash-content">
