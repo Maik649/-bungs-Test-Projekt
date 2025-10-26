@@ -3,17 +3,15 @@ const trashConten = document.getElementById("trash-content");
 let noteInput = document.getElementById("lnote");
 let titelInput = document.getElementById("ltitle");
 
-let notes = [];
-let titelNots = [];
-
+let notes = ["Einkaufen"];
 let trashNoats = [];
-let trashNoatsTitels = [];
-
 let newtrashNoats = [];
-let newtrashNoatsTitels = [];
 
 function init() {
-  return renderNodes();
+  getFromLocaleStorage();
+  getFromLocaleStorageTrashNotates();
+  renderNodes();
+  renderTrashNodes();
 }
 
 function renderNodes() {
@@ -35,30 +33,26 @@ function renderTrashNodes() {
 }
 
 function getNoteTamplate(notsindex) {
-  return `<p>+ ${titelNots[notsindex]} -> ${notes[notsindex]} <button onclick="removeItem(${notsindex})">x</button></p>`;
+  return `<p>+ ${notes[notsindex]} <button onclick="removeItem(${notsindex})">x</button></p>`;
 }
 
 function getTrashNoteTamplate(trashnotsindex) {
-  return `<p>+ ${trashNoatsTitels[trashnotsindex]} -> ${trashNoats[trashnotsindex]} <button onclick="removeTrashItem(${trashnotsindex})">x</button></p></p>`;
+  return `<p>+ ${trashNoats[trashnotsindex]} <button onclick="removeTrashItem(${trashnotsindex})">x</button></p></p>`;
 }
 
 function addnote() {
   notes.push(noteInput.value);
-  titelNots.push(titelInput.value);
   mainConten.innerHTML = "";
-
+  saveToLocaleStorage();
   renderNodes();
-  titelInput.value = "";
   noteInput.value = "";
 }
 
 function removeItem(notsindex) {
   let trashNoat = notes.splice(notsindex, 1);
   trashNoats.push(trashNoat);
-
-  let trashNoatTitel = titelNots.splice(notsindex, 1);
-  trashNoatsTitels.push(trashNoatTitel);
-
+  saveToLocaleStorage();
+  saveToLocaleStorageTrashNoats();
   renderNodes();
   renderTrashNodes();
 }
@@ -66,9 +60,38 @@ function removeItem(notsindex) {
 function removeTrashItem(trashnotsindex) {
   let removTrashNoat = trashNoats.splice(trashnotsindex, 1);
   newtrashNoats.push(removTrashNoat);
-
-  let removTrashNoatTitel = trashNoats.splice(trashnotsindex, 1);
-  newtrashNoatsTitels.push(removTrashNoatTitel);
-
+  saveToLocaleStorage();
+  saveToLocaleStorageTrashNoats();
   renderTrashNodes();
+}
+
+// In Local Storage Speichern
+function saveToLocaleStorage() {
+  localStorage.setItem("nots", JSON.stringify(notes));
+}
+
+function saveToLocaleStorageTrashNoats() {
+  localStorage.setItem("trashNoats",JSON.stringify(trashNoats)
+  );
+}
+
+// Von Local Storage Laden
+function getFromLocaleStorage() {
+  let newnotes = JSON.parse(localStorage.getItem("nots"));
+  notes = newnotes;
+  if (newnotes == "") {
+    notes = newnotes;
+  } else {
+    newnotes = notes;
+  }
+}
+
+function getFromLocaleStorageTrashNotates() {
+  let newtrashNoats = JSON.parse(localStorage.getItem("trashNoats"));
+  trashNoats = newtrashNoats;
+  if (newtrashNoats == "") {
+     newtrashNoats = trashNoats;
+  } else {
+    trashNoats = newtrashNoats;
+  }
 }
